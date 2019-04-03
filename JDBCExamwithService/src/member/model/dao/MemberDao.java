@@ -8,11 +8,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JCheckBox;
+
+import member.common.JDBCTemplate;
 import member.model.vo.Member;
 
 public class MemberDao {
-	public ArrayList<Member> printAll(Connection conn, ArrayList<Member> list) {
-//		ArrayList<Member> list = null;
+	public ArrayList<Member> printAll(Connection conn) {
+		ArrayList<Member> list = null;
 //		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rset = null;
@@ -50,14 +53,8 @@ public class MemberDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				rset.close();
-				stmt.close();
-//				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(stmt);
 		}
 		return list;
 	}
@@ -96,14 +93,8 @@ public class MemberDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				rset.close();
-				pstmt.close();
-//				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);//자식이라 노상관
 		}
 		return m;
 	}
@@ -145,14 +136,8 @@ public class MemberDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				rset.close();
-				pstmt.close();
-//				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);//자식이라 노상관
 		}
 		
 		return list;
@@ -193,13 +178,7 @@ public class MemberDao {
 			System.out.println("DB연결 실패");
 			e.printStackTrace();
 		} finally {
-			try {
-				pstmt.close();
-//				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			JDBCTemplate.close(pstmt);//자식이라 노상관
 		}
 		
 		return result;
@@ -218,14 +197,7 @@ public class MemberDao {
 				+ "address = ?,"
 				+ "hobby = ? "
 				+ "where member_id = ?";
-//				+ "member_pwd = '"+m.getMemberPwd()+"',"
-//				+ "email = '"+m.getEmail()+"',"
-//				+ "phone = '"+m.getPhone()+"',"
-//				+ "address = '"+m.getAddress()+"',"
-//				+ "hobby= '"+m.getHobby()+"' "
-//				+ "where member_id = '"+m.getMemberId()+"'";
-		
-		
+
 		try {
 //			Class.forName("oracle.jdbc.driver.OracleDriver");
 //			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "khjava", "1234");
@@ -250,13 +222,7 @@ public class MemberDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				pstmt.close();
-//				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			JDBCTemplate.close(pstmt);//자식이라 노상관
 		}
 		
 		return result;
@@ -289,14 +255,7 @@ public class MemberDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				pstmt.close();
-//				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			JDBCTemplate.close(pstmt);//자식이라 노상관
 		}
 		return result;
 	}
